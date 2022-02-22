@@ -3,3 +3,8 @@
 ^LICENSE\.md$
 ^README\.Rmd$
 ^cran-comments\.md$
+^\.gitlab-ci\.yml$
+^\.dockerignore$
+^\.renkulfsignore$
+^\.renku$
+^Dockerfile$
