@@ -1,0 +1,32 @@
+{
+  "@renku_data_type": "renku.core.models.project.Project",
+  "@renku_oid": "project",
+  "agent_version": "1.0.6",
+  "annotations": [],
+  "automated_update": false,
+  "creator": {
+    "@renku_data_type": "renku.core.models.provenance.agent.Person",
+    "@renku_data_value": {
+      "affiliation": null,
+      "alternate_name": null,
+      "email": "training@thegraphnetwork.org",
+      "id": "mailto:training@thegraphnetwork.org",
+      "name": "The Graph Courses"
+    }
+  },
+  "date_created": {
+    "@renku_data_type": "datetime.datetime",
+    "@renku_data_value": "2022-02-22T15:17:32+00:00"
+  },
+  "description": "Package to house autograders for The GRAPH Courses",
+  "id": "/projects/training/autograder",
+  "immutable_template_files": [],
+  "keywords": [],
+  "name": "autograder",
+  "template_id": "R-minimal",
+  "template_metadata": "{\"__template_source__\": \"https://github.com/SwissDataScienceCenter/renku-project-template\", \"__template_ref__\": \"0.3.0\", \"__template_id__\": \"R-minimal\", \"__namespace__\": \"the-graph-courses\", \"__automated_update__\": true, \"__repository__\": \"https://renkulab.io/gitlab\", \"__sanitized_project_name__\": \"autograder\", \"__project_slug__\": \"the-graph-courses/autograder\", \"__project_description__\": \"Package to house autograders for The GRAPH Courses\", \"__renku_version__\": \"1.0.6\", \"name\": \"autograder\", \"__name__\": \"autograder\"}",
+  "template_ref": "0.3.0",
+  "template_source": "https://github.com/SwissDataScienceCenter/renku-project-template",
+  "template_version": "fc5fddb1e14055ef5ac3b3332fc9bb8e271d7e08",
+  "version": 9
+}
