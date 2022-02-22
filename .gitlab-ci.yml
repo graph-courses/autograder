@@ -1,17 +1,47 @@
-variables:
-  GIT_STRATEGY: fetch
-  GIT_SSL_NO_VERIFY: "true"
-  GIT_LFS_SKIP_SMUDGE: 1
+image: rocker/tidyverse
 
 stages:
   - build
+  - test
+  - deploy
 
-image_build:
+building:
   stage: build
-  image: docker:stable
-  before_script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN http://$CI_REGISTRY
-  script: |
-    CI_COMMIT_SHA_7=$(echo $CI_COMMIT_SHA | cut -c1-7)
-    docker build --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA_7 .
-    docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA_7
+  script:
+    - R -e "remotes::install_deps(dependencies = TRUE)"
+    - R -e 'devtools::check()'
+
+# To have the coverage percentage appear as a gitlab badge follow these
+# instructions:
+# https://docs.gitlab.com/ee/user/project/pipelines/settings.html#test-coverage-parsing
+# The coverage parsing string is
+# Coverage: \d+\.\d+
+
+testing:
+    stage: test
+    allow_failure: true
+    when: on_success
+    only:
+        - master
+    script:
+        - Rscript -e 'install.packages("DT")'
+        - Rscript -e 'covr::gitlab(quiet = FALSE)'
+    artifacts:
+        paths:
+            - public
+
+# To produce a code coverage report as a GitLab page see
+# https://about.gitlab.com/2016/11/03/publish-code-coverage-report-with-gitlab-pages/
+
+pages:
+    stage: deploy
+    dependencies:
+        - testing
+    script:
+        - ls
+    artifacts:
+        paths:
+            - public
+        expire_in: 30 days
+    only:
+        - master
