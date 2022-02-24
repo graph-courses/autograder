@@ -9,6 +9,10 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/autograder)](https://CRAN.R-project.org/package=autograder)
+[![pipeline
+status](https://renkulab.io/gitlab/the-graph-courses/autograder/badges/master/pipeline.svg)](https://renkulab.io/gitlab/the-graph-courses/autograder/-/commits/master)
+[![coverage
+report](https://renkulab.io/gitlab/the-graph-courses/autograder/badges/master/coverage.svg)](https://renkulab.io/gitlab/the-graph-courses/autograder/-/commits/master)
 <!-- badges: end -->
 
 The goal of autograder is to …
