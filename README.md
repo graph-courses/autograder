@@ -23,6 +23,7 @@ Courses.
 You can install the development version of autograder like so:
 
 ``` r
+if(!require("remotes")) install.packages("remotes")
 remotes::install_git(url = "https://renkulab.io/gitlab/the-graph-courses/autograder.git")
 ```
 
@@ -32,10 +33,11 @@ This is a basic example which shows you how to solve a common problem:
 
 ``` r
 library(autograder)
-## basic example code
 ```
 
 ### score\_grid
+
+Create a grid with the score of each question:
 
 ``` r
 .scores <- rep(-1, times = 3)   # Put total number of questions as `times` argument
