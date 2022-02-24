@@ -15,7 +15,8 @@ status](https://renkulab.io/gitlab/the-graph-courses/autograder/badges/master/pi
 report](https://renkulab.io/gitlab/the-graph-courses/autograder/badges/master/coverage.svg)](https://renkulab.io/gitlab/the-graph-courses/autograder/-/commits/master)
 <!-- badges: end -->
 
-The goal of autograder is to …
+The goal of `autograder` is to house autograder functions for The GRAPH
+Courses.
 
 ## Installation
 
