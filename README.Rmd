@@ -51,6 +51,55 @@ Create a grid with the score of each question:
 ```
 
 
+<!-- 
+
+if linux then cli examples on readme like 
+
+ref
+https://github.com/r-lib/asciicast#limitations
+
+---
+title: autograde
+output:
+  md_document:
+    variant: markdown_github
+always_allow_html: yes
+---
+
+` ``{r, include = FALSE, cache = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%",
+  cache = TRUE
+)
+Sys.setenv(CLI_TICK_TIME = "100")
+# Turn on ANSI colors
+options(cli.num_colors = 256L)
+asciicast::init_knitr_engine(
+    startup = quote({
+        library(cli)
+        set.seed(1) }),
+    echo = TRUE, 
+    same_process = FALSE,
+    echo_input = FALSE,
+    options = list(
+        asciicast_end_wait = 3
+    )
+)
+` ``
+
+
+` ``{asciicast cli-score}
+.scores <- rep(-1, times = 3)   # Put total number of questions as `times` argument
+.score_grid()
+` ``
+
+-->
+
+
+
 <!-- ----- -->
 
 <!-- # autograder -->
