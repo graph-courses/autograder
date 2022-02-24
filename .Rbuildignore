@@ -8,3 +8,4 @@
 ^\.renkulfsignore$
 ^\.renku$
 ^Dockerfile$
+^public
