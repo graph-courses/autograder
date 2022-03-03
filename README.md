@@ -35,18 +35,38 @@ This is a basic example which shows you how to solve a common problem:
 library(autograder)
 ```
 
+First, Put total number of questions as `times` argument
+
+``` r
+.scores <- rep(-1, times = 3)
+```
+
 ### score\_grid
 
 Create a grid with the score of each question:
 
 ``` r
-.scores <- rep(-1, times = 3)   # Put total number of questions as `times` argument
 .score_grid()
 #> 
 #>   1   2   3
 ```
 
-### spinner\_function
+### score\_print
+
+Print complete scores:
+
+``` r
+.score_print()
+#> 
+#>   1   2   3
+#> [ ] Answered: 0 of 3
+#> v Correct: 0 of 3
+#> > Score so far: NA %
+```
+
+### Internal functions
+
+#### spinner\_function
 
 Create a heart spinner:
 
