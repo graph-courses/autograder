@@ -46,6 +46,14 @@ Create a grid with the score of each question:
 #>   1   2   3
 ```
 
+### spinner\_function
+
+Create a heart spinner:
+
+``` r
+.spinner_function()
+```
+
 <!-- 
 
 if linux then cli examples on readme like 

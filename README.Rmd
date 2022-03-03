@@ -50,6 +50,14 @@ Create a grid with the score of each question:
 .score_grid()
 ```
 
+### spinner_function
+
+Create a heart spinner:
+
+```{r}
+.spinner_function()
+```
+
 
 <!-- 
 
