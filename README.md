@@ -35,6 +35,45 @@ This is a basic example which shows you how to solve a common problem:
 library(autograder)
 ```
 
+## raw
+
+``` r
+.scores <- rep(-1, times = 1)
+.check_q1 <-
+  function() {
+    .problem_number <<- 1
+    .autograder <<- 
+      function(){
+        if (is.character(q1)) return(c(value = -1, message = "Enter a raw number."))
+        if (q1 == ncol(iris)) return(c(value = 0, message = "Calculating number of cols"))
+        if (q1 == nrow(iris)) return(c(value = 1, message = paste("Correct!", praise::praise()) ))
+        return(c(value = 0, message = "Wrong. Please try again."))
+      }
+    .apply_autograder()
+  }
+q1 <- "YOUR ANSWER HERE"
+.check_q1()
+#> Enter a raw number.
+#>   1
+q1 <- ncol(iris)
+.check_q1()
+#> Calculating number of cols
+#>   1
+q1 <- nrow(iris)
+.check_q1()
+#> Correct! You are polished!
+#>   1
+.score_print()
+#> 
+#>   1
+#> [ ] Answered: 1 of 1
+#> v Correct: 1 of 1
+#> > Score so far: 100 %
+#> Ah! HURRAH!-WHEE! This is enormously majestic!
+```
+
+## detailed
+
 First, Put total number of questions as `times` argument
 
 ``` r

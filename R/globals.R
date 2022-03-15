@@ -1,1 +1,1 @@
-utils::globalVariables(c(".scores"))
+utils::globalVariables(c(".scores",".problem_number",".autograder"))
