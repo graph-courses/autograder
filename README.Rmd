@@ -41,62 +41,88 @@ This is a basic example which shows you how to solve a common problem:
 library(autograder)
 ```
 
-
-## raw
+First, set the total number of questions in the `times` argument:
 
 ```{r}
 .scores <- rep(-1, times = 1)
+```
+
+Second, write a `check_q#()` function:
+
+```{r}
 .check_q1 <-
   function() {
+    
+    # set number 
     .problem_number <<- 1
+    
     .autograder <<- 
       function(){
+        
+        # if initial message "your answer here" is not changed
         if (is.character(q1)) return(c(value = -1, message = "Enter a raw number."))
-        if (q1 == ncol(iris)) return(c(value = 0, message = "Calculating number of cols"))
+        
+        # excelent to highlight common mistakes
+        if (q1 == ncol(iris)) return(c(value = 0, message = "This calculates the number of columns."))
+        
+        # correct answer
         if (q1 == nrow(iris)) return(c(value = 1, message = paste("Correct!", praise::praise()) ))
+        
+        # if any other unexpected input is assigned
         return(c(value = 0, message = "Wrong. Please try again."))
       }
     .apply_autograder()
   }
+```
+
+Third, use the `check_q#()` function to evaluate all the scenarios detailed inside it:
+
+```{r,warning=FALSE}
 q1 <- "YOUR ANSWER HERE"
 .check_q1()
+
+q1 <- iris
+.check_q1()
+
 q1 <- ncol(iris)
 .check_q1()
+
 q1 <- nrow(iris)
 .check_q1()
+```
+
+Lastly, use the `.score_print()` function to print the final scores:
+
+```{r}
 .score_print()
 ```
 
 
+## Some detailes
 
-## detailed
+### Scoring logic
 
-First, Put total number of questions as `times` argument
+Current logic:
+
+- `-1` ~ NA
+- `0` ~ wrong
+- `1` ~ correct
+
+This is open to additional categories, for example, `.5` ~ half score
+
+In the `.scores` object, we set `-1` given this logic.
 
 ```{r}
 .scores <- rep(-1, times = 3)
 ```
 
-### score_grid
+### Internal functions
 
 Create a grid with the score of each question:
 
 ```{r}
 .score_grid()
 ```
-
-### score_print
-
-Print complete scores:
-
-```{r}
-.score_print()
-```
-
-
-### Internal functions
-
-#### spinner_function
 
 Create a heart spinner:
 
