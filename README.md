@@ -35,13 +35,22 @@ This is a basic example which shows you how to solve a common problem:
 library(autograder)
 ```
 
-First, set the total number of questions in the `times` argument:
+First, create a `.scores` object to set the *total number of questions*
+in one lesson.
+
+For this, use the `rep()` function to set this as the number of `times`
+to repeat the value `-1` (why? go to *extra details*).
+
+-   For one question: `.scores <- rep(-1, times = 1)`
+-   For two questions: `.scores <- rep(-1, times = 2)`
+-   For `n` questions: `.scores <- rep(-1, times = n)`
 
 ``` r
+# one question
 .scores <- rep(-1, times = 1)
 ```
 
-Second, write a `check_q#()` function:
+Second, write a `check_q*()` function:
 
 ``` r
 .check_q1 <-
@@ -69,7 +78,7 @@ Second, write a `check_q#()` function:
   }
 ```
 
-Third, use the `check_q#()` function to evaluate all the scenarios
+Third, use the `check_q*()` function to evaluate all the scenarios
 detailed inside it:
 
 ``` r
@@ -90,7 +99,7 @@ q1 <- ncol(iris)
 
 q1 <- nrow(iris)
 .check_q1()
-#> Correct! You are cat's pajamas!
+#> Correct! You are impressive!
 #>   1
 ```
 
@@ -103,10 +112,10 @@ Lastly, use the `.score_print()` function to print the final scores:
 #> [ ] Answered: 1 of 1
 #> v Correct: 1 of 1
 #> > Score so far: 100 %
-#> Hurray! MMH!-MMH! This is openly badass!
+#> Aw! HAH!-AWW! This is eagerly fabulous!
 ```
 
-## Some detailes
+## Extra details
 
 ### Scoring logic
 
@@ -116,12 +125,51 @@ Current logic:
 -   `0` \~ wrong
 -   `1` \~ correct
 
-This is open to additional categories, for example, `.5` \~ half score
+This logic is open to additional categories, for example, `.5` \~ half
+score.
 
-In the `.scores` object, we set `-1` given this logic.
+Given this logic, in the `.scores` object we set `-1` as a default
+value.
+
+### Snippets
+
+Quickly generate a template for a `check_q*()` function:
+
+<!-- ![Use the check snippet. GIF captured with LICEcap.](man/figures/demo_autograder_01.gif) -->
+
+<div class="figure" style="text-align: center">
+
+<img src="man/figures/demo_autograder_01.gif" alt="Use the check snippet. GIF captured with LICEcap." width="100%" />
+<p class="caption">
+Use the check snippet. GIF captured with LICEcap.
+</p>
+
+</div>
+
+For more details about snippets visit this [blog post full of
+gifs](https://appsilon.com/rstudio-shortcuts-and-tips/) or this [rstudio
+article](https://support.rstudio.com/hc/en-us/articles/204463668-Code-Snippets-in-the-RStudio-IDE).
+
+To add this snippet in your own Rstudio
+
+-   First, go to *Tools -&gt; Global Options -&gt; Code -&gt; Snippets
+    -&gt; Edit Snippets*,
+-   Then, paste this text at the bottom of all the default snippets:
 
 ``` r
-.scores <- rep(-1, times = 3)
+snippet check
+    .check_q${1:number} <-
+      function() {
+        .problem_number <<- ${1:number}
+        .autograder <<-
+          function(){
+            if (${2:test_null}) return(c(value = -1, message = "${3:string_null}"))
+            if (${4:test_mistake}) return(c(value = 0, message = "${5:string_mistake}"))
+            if (${6:test_correct}) return(c(value = 1, message = paste("Correct!", praise::praise()) ))
+            return(c(value = 0, message = "Wrong. Please try again."))
+          }
+        .apply_autograder()
+      }
 ```
 
 ### Internal functions
@@ -131,7 +179,7 @@ Create a grid with the score of each question:
 ``` r
 .score_grid()
 #> 
-#>   1   2   3
+#>   1
 ```
 
 Create a heart spinner:
