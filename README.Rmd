@@ -45,8 +45,8 @@ First, create a `.scores` object to set the _total number of questions_ in one l
 
 For this, use the `rep()` function to set this as the number of `times` to repeat the value `-1` (why? go to _extra details_).
 
-- For one question: `.scores <- rep(-1, times = 1)`
-- For two questions: `.scores <- rep(-1, times = 2)`
+- For `1` question: `.scores <- rep(-1, times = 1)`
+- For `2` questions: `.scores <- rep(-1, times = 2)`
 - For `n` questions: `.scores <- rep(-1, times = n)`
 
 ```{r}
@@ -124,7 +124,13 @@ Quickly generate a template for a `check_q*()` function:
 
 <!-- ![Use the check snippet. GIF captured with LICEcap.](man/figures/demo_autograder_01.gif) -->
 
-```{r, echo=FALSE, eval=TRUE,fig.cap="Use the check snippet. GIF captured with LICEcap.",fig.align='center'}
+<!-- last knitr update https://stackoverflow.com/a/70665396/6702544 -->
+
+```{r, echo=FALSE, eval=TRUE}
+#| fig.align: 'center'
+#| fig.cap: >
+#|   Caption: Use the check snippet. 
+#|   GIF captured with LICEcap.
 knitr::include_graphics(path = "man/figures/demo_autograder_01.gif")
 ```
 

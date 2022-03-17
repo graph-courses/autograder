@@ -41,8 +41,8 @@ in one lesson.
 For this, use the `rep()` function to set this as the number of `times`
 to repeat the value `-1` (why? go to *extra details*).
 
--   For one question: `.scores <- rep(-1, times = 1)`
--   For two questions: `.scores <- rep(-1, times = 2)`
+-   For `1` question: `.scores <- rep(-1, times = 1)`
+-   For `2` questions: `.scores <- rep(-1, times = 2)`
 -   For `n` questions: `.scores <- rep(-1, times = n)`
 
 ``` r
@@ -99,7 +99,7 @@ q1 <- ncol(iris)
 
 q1 <- nrow(iris)
 .check_q1()
-#> Correct! You are impressive!
+#> Correct! You are riveting!
 #>   1
 ```
 
@@ -112,7 +112,7 @@ Lastly, use the `.score_print()` function to print the final scores:
 #> [ ] Answered: 1 of 1
 #> v Correct: 1 of 1
 #> > Score so far: 100 %
-#> Aw! HAH!-AWW! This is eagerly fabulous!
+#> Aww! HUH!-GEE! This is healthily finest!
 ```
 
 ## Extra details
@@ -136,12 +136,13 @@ value.
 Quickly generate a template for a `check_q*()` function:
 
 <!-- ![Use the check snippet. GIF captured with LICEcap.](man/figures/demo_autograder_01.gif) -->
+<!-- last knitr update https://stackoverflow.com/a/70665396/6702544 -->
 
 <div class="figure" style="text-align: center">
 
-<img src="man/figures/demo_autograder_01.gif" alt="Use the check snippet. GIF captured with LICEcap." width="100%" />
+<img src="man/figures/demo_autograder_01.gif" alt="Caption: Use the check snippet. GIF captured with LICEcap." width="100%" />
 <p class="caption">
-Use the check snippet. GIF captured with LICEcap.
+Caption: Use the check snippet. GIF captured with LICEcap.
 </p>
 
 </div>
