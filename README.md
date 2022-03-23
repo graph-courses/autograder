@@ -59,17 +59,23 @@ Second, write a `check_q*()` function:
     # set number 
     .problem_number <<- 1
     
+    # write the right answer
+    .q1_correct <- nrow(iris)
+    
+    # write one common mistake
+    .q1_mistake <- ncol(iris)
+    
     .autograder <<- 
       function(){
         
-        # if initial message "your answer here" is not changed
-        if (is.character(q1)) return(c(value = -1, message = "Enter a raw number."))
+        # if input class object is not correct
+        if (!is.numeric(q1)) return(c(value = -1, message = "Your result should be a number"))
         
         # excelent to highlight common mistakes
-        if (q1 == ncol(iris)) return(c(value = 0, message = "This calculates the number of columns."))
+        if (q1 == .q1_mistake) return(c(value = 0, message = "You should calculate the number of rows, not columns."))
         
         # correct answer
-        if (q1 == nrow(iris)) return(c(value = 1, message = paste("Correct!", praise::praise()) ))
+        if (q1 == .q1_correct) return(c(value = 1, message = paste("Correct!", praise::praise()) ))
         
         # if any other unexpected input is assigned
         return(c(value = 0, message = "Wrong. Please try again."))
@@ -84,22 +90,22 @@ detailed inside it:
 ``` r
 q1 <- "YOUR ANSWER HERE"
 .check_q1()
-#> Enter a raw number.
+#> Your result should be a number
 #>   1
 
 q1 <- iris
 .check_q1()
-#> Wrong. Please try again.
+#> Your result should be a number
 #>   1
 
 q1 <- ncol(iris)
 .check_q1()
-#> This calculates the number of columns.
+#> You should calculate the number of rows, not columns.
 #>   1
 
 q1 <- nrow(iris)
 .check_q1()
-#> Correct! You are riveting!
+#> Correct! You are stylish!
 #>   1
 ```
 
@@ -112,7 +118,7 @@ Lastly, use the `.score_print()` function to print the final scores:
 #> [ ] Answered: 1 of 1
 #> v Correct: 1 of 1
 #> > Score so far: 100 %
-#> Aww! HUH!-GEE! This is healthily finest!
+#> Mmh! GEE!-MMHM! This is powerfully finest!
 ```
 
 ## Extra details
@@ -157,21 +163,60 @@ To add this snippet in your own Rstudio
     -&gt; Edit Snippets*,
 -   Then, paste this text at the bottom of all the default snippets:
 
-``` r
-snippet check
-    .check_q${1:number} <-
-      function() {
-        .problem_number <<- ${1:number}
-        .autograder <<-
-          function(){
-            if (${2:test_null}) return(c(value = -1, message = "${3:string_null}"))
-            if (${4:test_mistake}) return(c(value = 0, message = "${5:string_mistake}"))
-            if (${6:test_correct}) return(c(value = 1, message = paste("Correct!", praise::praise()) ))
-            return(c(value = 0, message = "Wrong. Please try again."))
+<!-- -->
+
+    snippet score
+        # [backend]
+        .scores <- rep(-1, times = ${1:total_questions_in_lesson})
+        
+        # create one check function per question
+        check${2:}
+        
+        # [frontend]
+        .score_print()
+
+    snippet check
+        # [backend]
+        .check_q${1:question_number} <-
+          function() {
+            .problem_number <<- ${1:question_number}
+            
+            .q${1:question_number}_correct <- ${2:check_correct} # write correct answer
+            .q${1:question_number}_mistake1 <- ${3:check_mistake} # optional: highlight common mistake
+            
+            .autograder <<-
+              function(){
+                if (!is.${4:check_class}(q${1:question_number})) return(c(value = -1, message = "Your result should be ${5:check_class}."))
+                if (isTRUE(all.equal(q${1:question_number}, .q${1:question_number}_mistake1))) return(c(value = 0, message = "${6:write_mistake}."))
+                if (isTRUE(all.equal(q${1:question_number}, .q${1:question_number}_correct))) return(c(value = 1, message = paste("Correct!", praise::praise()) ))
+                # wrong
+                return(c(value = 0, message = "Wrong. Please try again."))
+              }
+            .apply_autograder()
           }
-        .apply_autograder()
-      }
-```
+        
+        # [backend]
+        # create one hint per question
+        .hint_q${1:question_number} <- function(){
+        'Type:
+          ${7:write_hint}' -> out
+        cat(out)
+        }
+        
+        # [frontend]
+        # to paste in lesson
+        q${1:question_number} <- "${8:write_prehint}"
+        .check_q${1:question_number}()
+        .hint_q${1:question_number}()
+        
+        # [backend]
+        # test the check function
+        q${1:question_number} <- ${3:check_mistake}
+        .check_q${1:question_number}()
+        q${1:question_number} <- ${2:check_correct}
+        .check_q${1:question_number}()
+        
+        # for one more question, use the "check" snippet again!
 
 ### Internal functions
 
