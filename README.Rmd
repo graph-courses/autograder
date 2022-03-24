@@ -142,66 +142,12 @@ knitr::include_graphics(path = "man/figures/demo_autograder_01.gif")
 
 For more details about snippets visit this [blog post full of gifs](https://appsilon.com/rstudio-shortcuts-and-tips/) or this [rstudio article](https://support.rstudio.com/hc/en-us/articles/204463668-Code-Snippets-in-the-RStudio-IDE).
 
-To add this snippet in your own Rstudio 
+To add this snippet in your own Rstudio: 
 
-- First, go to _Tools -> Global Options -> Code -> Snippets -> Edit Snippets_, 
-- Then, paste this text at the bottom of all the default snippets:
-
-```
-snippet score
-	# [backend]
-	.scores <- rep(-1, times = ${1:total_questions_in_lesson})
-	
-	# create one check function per question
-	check${2:}
-	
-	# [frontend]
-	.score_print()
-
-snippet check
-	# [backend]
-	.check_q${1:question_number} <-
-	  function() {
-	    .problem_number <<- ${1:question_number}
-	    
-	    .q${1:question_number}_correct <- ${2:check_correct} # write correct answer
-	    .q${1:question_number}_mistake1 <- ${3:check_mistake} # optional: highlight common mistake
-	    
-	    .autograder <<-
-	      function(){
-	        if (!is.${4:check_class}(q${1:question_number})) return(c(value = -1, message = "Your result should be ${5:check_class}."))
-	        if (isTRUE(all.equal(q${1:question_number}, .q${1:question_number}_mistake1))) return(c(value = 0, message = "${6:write_mistake}."))
-	        if (isTRUE(all.equal(q${1:question_number}, .q${1:question_number}_correct))) return(c(value = 1, message = paste("Correct!", praise::praise()) ))
-	        # wrong
-	        return(c(value = 0, message = "Wrong. Please try again."))
-	      }
-	    .apply_autograder()
-	  }
-	
-	# [backend]
-	# create one hint per question
-	.hint_q${1:question_number} <- function(){
-	'Type:
-	  ${7:write_hint}' -> out
-	cat(out)
-	}
-	
-	# [frontend]
-	# to paste in lesson
-	q${1:question_number} <- "${8:write_prehint}"
-	.check_q${1:question_number}()
-	.hint_q${1:question_number}()
-	
-	# [backend]
-	# test the check function
-	q${1:question_number} <- ${3:check_mistake}
-	.check_q${1:question_number}()
-	q${1:question_number} <- ${2:check_correct}
-	.check_q${1:question_number}()
-	
-	# for one more question, use the "check" snippet again!
-```
-
+- First, go to the [snippets section of this project (following this link)](https://renkulab.io/gitlab/the-graph-courses/autograder/-/snippets/1642) and push the __`Copy file contents`__ button (top right).
+![](man/figures/snippets_autograder_01.png)
+- Then, in Rstudio go to: _Tools -> Global Options -> Code -> Snippets -> Edit Snippets_, 
+- Finally, __paste__ the content at the bottom of all the default snippets.
 
 ### Internal functions
 
