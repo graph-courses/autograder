@@ -23,6 +23,13 @@ Courses.
 You can install the development version of autograder like so:
 
 ``` r
+if(!require("pacman")) install.packages("pacman")
+pacman::pacman::p_load_gh("graph-courses/autograder")
+```
+
+or
+
+``` r
 if(!require("remotes")) install.packages("remotes")
 remotes::install_git(url = "https://renkulab.io/gitlab/the-graph-courses/autograder.git")
 ```
@@ -120,7 +127,7 @@ Lastly, use the `.score_print()` function to print the final scores:
 #> ☐ Answered: 1 of 1
 #> ✔ Correct: 1 of 1
 #> → Score so far: 100 %
-#> Mm! YOW!-WOWIE! This is regularly terrific!
+#> Hurray! HO-HO!-HURRAY! This is clearly bedazzling!
 ```
 
 ## Extra details
