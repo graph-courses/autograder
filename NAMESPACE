@@ -2,6 +2,7 @@
 
 export(.apply_autograder)
 export(.fail)
+export(.na)
 export(.pass)
 export(.score_grid)
 export(.score_print)
