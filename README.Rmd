@@ -30,7 +30,7 @@ You can install the development version of autograder like so:
 
 ``` r
 if(!require("pacman")) install.packages("pacman")
-pacman::pacman::p_load_gh("graph-courses/autograder")
+pacman::p_install_gh("graph-courses/autograder")
 ```
 
 or

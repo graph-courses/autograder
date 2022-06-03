@@ -24,7 +24,7 @@ You can install the development version of autograder like so:
 
 ``` r
 if(!require("pacman")) install.packages("pacman")
-pacman::pacman::p_load_gh("graph-courses/autograder")
+pacman::p_install_gh("graph-courses/autograder")
 ```
 
 or
@@ -114,7 +114,7 @@ q1 <- ncol(iris)
 # pass correct
 q1 <- nrow(iris)
 .check_q1()
-#> Correct! You are neat!
+#> Correct! You are posh!
 #>   1
 ```
 
@@ -127,7 +127,7 @@ Lastly, use the `.score_print()` function to print the final scores:
 #> ☐ Answered: 1 of 1
 #> ✔ Correct: 1 of 1
 #> → Score so far: 100 %
-#> Gee! UH-HU!-AHHH! This is daringly solid!
+#> Heh! AHHH!-YAY! This is kindly dandy!
 ```
 
 ## Extra details
