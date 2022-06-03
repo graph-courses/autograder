@@ -80,7 +80,7 @@ Second, write a `check_q*()` function:
       function(){
         if (is.character(q1)) .na(message = "Your answer should be a data frame.")
         if (q1 == .q1_mistake) .fail(message = "You calculated the number of columns.")
-        if (q1 == .q1_correct) .pass(message = "Correct! You are groovy!")
+        if (q1 == .q1_correct) .pass()
         else .fail()
       }
     .run_autograder()
@@ -133,7 +133,7 @@ Given this logic, in the `.scores` object we set `-1` as a default value.
 
 ### Snippets
 
-Quickly generate a template for a `check_q*()` function:
+Quickly generate a template for a `check_q*()` function and move between sections using the **`tab`** key:
 
 <!-- ![Use the check snippet. GIF captured with LICEcap.](man/figures/demo_autograder_01.gif) -->
 

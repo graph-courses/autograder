@@ -76,7 +76,7 @@ Second, write a `check_q*()` function:
       function(){
         if (is.character(q1)) .na(message = "Your answer should be a data frame.")
         if (q1 == .q1_mistake) .fail(message = "You calculated the number of columns.")
-        if (q1 == .q1_correct) .pass(message = "Correct! You are groovy!")
+        if (q1 == .q1_correct) .pass()
         else .fail()
       }
     .run_autograder()
@@ -114,7 +114,7 @@ q1 <- ncol(iris)
 # pass correct
 q1 <- nrow(iris)
 .check_q1()
-#> Correct! You are groovy!
+#> Correct! You are neat!
 #>   1
 ```
 
@@ -127,7 +127,7 @@ Lastly, use the `.score_print()` function to print the final scores:
 #> ☐ Answered: 1 of 1
 #> ✔ Correct: 1 of 1
 #> → Score so far: 100 %
-#> Hurray! HO-HO!-HURRAY! This is clearly bedazzling!
+#> Gee! UH-HU!-AHHH! This is daringly solid!
 ```
 
 ## Extra details
@@ -148,7 +148,8 @@ value.
 
 ### Snippets
 
-Quickly generate a template for a `check_q*()` function:
+Quickly generate a template for a `check_q*()` function and move between
+sections using the **`tab`** key:
 
 <!-- ![Use the check snippet. GIF captured with LICEcap.](man/figures/demo_autograder_01.gif) -->
 <!-- last knitr update https://stackoverflow.com/a/70665396/6702544 -->
