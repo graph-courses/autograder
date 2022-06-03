@@ -56,7 +56,7 @@ Second, write a `check_q*()` function:
 .check_q1 <-
   function() {
     
-    # set number 
+    # set number
     .problem_number <<- 1
     
     # write the right answer
@@ -65,22 +65,14 @@ Second, write a `check_q*()` function:
     # write one common mistake
     .q1_mistake <- ncol(iris)
     
-    .autograder <<- 
+    .autograder <<-
       function(){
-        
-        # if input class object is not correct
-        if (!is.numeric(q1)) return(c(value = -1, message = "Your result should be a number"))
-        
-        # excelent to highlight common mistakes
-        if (q1 == .q1_mistake) return(c(value = 0, message = "You should calculate the number of rows, not columns."))
-        
-        # correct answer
-        if (q1 == .q1_correct) return(c(value = 1, message = paste("Correct!", praise::praise()) ))
-        
-        # if any other unexpected input is assigned
-        return(c(value = 0, message = "Wrong. Please try again."))
+        if (is.character(q1)) .na(message = "Your answer should be a data frame.")
+        if (q1 == .q1_mistake) .fail(message = "You calculated the number of columns.")
+        if (q1 == .q1_correct) .pass(message = "Correct! You are groovy!")
+        else .fail()
       }
-    .apply_autograder()
+    .run_autograder()
   }
 ```
 
@@ -88,24 +80,34 @@ Third, use the `check_q*()` function to evaluate all the scenarios
 detailed inside it:
 
 ``` r
+# invalid
+q1 <- c(1,1)
+.check_q1()
+#> Invalid answer. Please check your work
+#>   1
+
+# na not dataframe
 q1 <- "YOUR ANSWER HERE"
 .check_q1()
-#> Your result should be a number
+#> Your answer should be a data frame.
 #>   1
 
+# fail other
 q1 <- iris
 .check_q1()
-#> Your result should be a number
+#> Invalid answer. Please check your work
 #>   1
 
+# fail mistake
 q1 <- ncol(iris)
 .check_q1()
-#> You should calculate the number of rows, not columns.
+#> You calculated the number of columns.
 #>   1
 
+# pass correct
 q1 <- nrow(iris)
 .check_q1()
-#> Correct! You are slick!
+#> Correct! You are groovy!
 #>   1
 ```
 
@@ -115,10 +117,10 @@ Lastly, use the `.score_print()` function to print the final scores:
 .score_print()
 #> 
 #>   1
-#> [ ] Answered: 1 of 1
-#> v Correct: 1 of 1
-#> > Score so far: 100 %
-#> Hurray! UH-HU!-YIKES! This is enormously world-class!
+#> ☐ Answered: 1 of 1
+#> ✔ Correct: 1 of 1
+#> → Score so far: 100 %
+#> Mm! YOW!-WOWIE! This is regularly terrific!
 ```
 
 ## Extra details
@@ -144,14 +146,7 @@ Quickly generate a template for a `check_q*()` function:
 <!-- ![Use the check snippet. GIF captured with LICEcap.](man/figures/demo_autograder_01.gif) -->
 <!-- last knitr update https://stackoverflow.com/a/70665396/6702544 -->
 
-<div class="figure" style="text-align: center">
-
-<img src="man/figures/demo_autograder_01.gif" alt="Caption: Use the check snippet. GIF captured with LICEcap." width="100%" />
-<p class="caption">
-Caption: Use the check snippet. GIF captured with LICEcap.
-</p>
-
-</div>
+<img src="man/figures/demo_autograder_01.gif" title="Caption: Use the check snippet. GIF captured with LICEcap." alt="Caption: Use the check snippet. GIF captured with LICEcap." width="100%" style="display: block; margin: auto;" />
 
 For more details about snippets visit this [blog post full of
 gifs](https://appsilon.com/rstudio-shortcuts-and-tips/) or this [rstudio
@@ -163,8 +158,8 @@ To add this snippet in your own Rstudio:
     link)](https://renkulab.io/gitlab/the-graph-courses/autograder/-/snippets/1642)
     and push the **`Copy file contents`** button (top right).
     ![](man/figures/snippets_autograder_01.png)
--   Then, in Rstudio go to: *Tools -&gt; Global Options -&gt; Code -&gt;
-    Snippets -&gt; Edit Snippets*,
+-   Then, in Rstudio go to: *Tools -\> Global Options -\> Code -\>
+    Snippets -\> Edit Snippets*,
 -   Finally, **paste** the content at the bottom of all the default
     snippets.
 
