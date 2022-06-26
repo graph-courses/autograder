@@ -24,6 +24,8 @@ knitr::opts_chunk$set(
 
 The goal of `autograder` is to house autograder functions for The GRAPH Courses.
 
+![](https://renkulab.io/gitlab/the-graph-courses/autograder/-/raw/master/images/autograder_hex_sticker.png)
+
 ## Installation
 
 You can install the development version of autograder like so:
