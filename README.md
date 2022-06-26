@@ -1,4 +1,3 @@
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # autograder
@@ -17,6 +16,8 @@ report](https://renkulab.io/gitlab/the-graph-courses/autograder/badges/master/co
 
 The goal of `autograder` is to house autograder functions for The GRAPH
 Courses.
+
+![](https://renkulab.io/gitlab/the-graph-courses/autograder/-/raw/master/images/autograder_hex_sticker.png)
 
 ## Installation
 
