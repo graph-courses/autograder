@@ -1,7 +1,7 @@
 ---
 output: github_document
 ---
-
+ 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, include = FALSE}
@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )   
 ```
 
-# autograder
+# autograder 
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
@@ -24,9 +24,18 @@ knitr::opts_chunk$set(
 
 The goal of `autograder` is to house autograder functions for The GRAPH Courses.
 
+![](https://renkulab.io/gitlab/the-graph-courses/autograder/-/raw/master/images/autograder_hex_sticker.png)
+
 ## Installation
 
 You can install the development version of autograder like so:
+
+``` r
+if(!require("pacman")) install.packages("pacman")
+pacman::p_install_gh("graph-courses/autograder")
+```
+
+or
 
 ``` r
 if(!require("remotes")) install.packages("remotes")
@@ -60,7 +69,7 @@ Second, write a `check_q*()` function:
 .check_q1 <-
   function() {
     
-    # set number 
+    # set number
     .problem_number <<- 1
     
     # write the right answer
@@ -69,37 +78,37 @@ Second, write a `check_q*()` function:
     # write one common mistake
     .q1_mistake <- ncol(iris)
     
-    .autograder <<- 
+    .autograder <<-
       function(){
-        
-        # if input class object is not correct
-        if (!is.numeric(q1)) return(c(value = -1, message = "Your result should be a number"))
-        
-        # excelent to highlight common mistakes
-        if (q1 == .q1_mistake) return(c(value = 0, message = "You should calculate the number of rows, not columns."))
-        
-        # correct answer
-        if (q1 == .q1_correct) return(c(value = 1, message = paste("Correct!", praise::praise()) ))
-        
-        # if any other unexpected input is assigned
-        return(c(value = 0, message = "Wrong. Please try again."))
+        if (is.character(q1)) .na(message = "Your answer should be a data frame.")
+        if (q1 == .q1_mistake) .fail(message = "You calculated the number of columns.")
+        if (q1 == .q1_correct) .pass()
+        else .fail()
       }
-    .apply_autograder()
+    .run_autograder()
   }
 ```
 
 Third, use the `check_q*()` function to evaluate all the scenarios detailed inside it:
 
 ```{r,warning=FALSE}
+# invalid
+q1 <- c(1,1)
+.check_q1()
+
+# na not dataframe
 q1 <- "YOUR ANSWER HERE"
 .check_q1()
 
+# fail other
 q1 <- iris
 .check_q1()
 
+# fail mistake
 q1 <- ncol(iris)
 .check_q1()
 
+# pass correct
 q1 <- nrow(iris)
 .check_q1()
 ```
@@ -126,7 +135,7 @@ Given this logic, in the `.scores` object we set `-1` as a default value.
 
 ### Snippets
 
-Quickly generate a template for a `check_q*()` function:
+Quickly generate a template for a `check_q*()` function and move between sections using the **`tab`** key:
 
 <!-- ![Use the check snippet. GIF captured with LICEcap.](man/figures/demo_autograder_01.gif) -->
 

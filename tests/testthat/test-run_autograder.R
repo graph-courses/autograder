@@ -1,5 +1,7 @@
-test_that("autograder v1 reprex works", {
+test_that("autograder v2 reprex works", {
+
   .scores <<- rep(-1, times = 1)
+
   expect_snapshot({
 
     .check_q1 <-
@@ -7,12 +9,12 @@ test_that("autograder v1 reprex works", {
         .problem_number <<- 1
         .autograder <<-
           function(){
-            if (is.character(q1)) return(c(value = -1, message = "Enter a raw number."))
-            if (q1 == ncol(iris)) return(c(value = 0, message = "Calculating number of cols"))
-            if (q1 == nrow(iris)) return(c(value = 1, message = paste("Correct!", praise::praise()) ))
-            return(c(value = 0, message = "Wrong. Please try again."))
+            if (is.character(q1)) .na(message = "Your answer should be a data frame.")
+            if (q1 == ncol(iris)) .fail()
+            if (q1 == nrow(iris)) .pass()
+            else .fail()
           }
-        .apply_autograder()
+        .run_autograder()
       }
 
     # invalid
@@ -30,6 +32,7 @@ test_that("autograder v1 reprex works", {
     # # pass correct
     # q1 <- nrow(iris)
     # .check_q1()
+
 
   })
 })
