@@ -25,21 +25,21 @@
     # NA
     if (.scores[i] == -1) {
       if (i == .problem_number)
-        score_icons[i] <- cli::bg_black(cli::style_bold(cli::col_white(paste0("", intToUtf8(0x1405), " ", i, " ", intToUtf8(0x140A), ""))))
+        score_icons[i] <- cli::bg_black(cli::style_bold(cli::col_white(paste0(intToUtf8(0x5125), i, intToUtf8(0x5130)))))
       else
         score_icons[i] <- cli::bg_black(cli::style_bold(cli::col_white(paste0(" ", i, " "))))
     }
     # WRONG
     else if (.scores[i] == 0) {
       if (i == .problem_number)
-        score_icons[i] <- cli::bg_red(cli::style_bold(cli::col_white(paste0("", intToUtf8(0x1405), " ", i, " ", intToUtf8(0x140A), ""))))
+        score_icons[i] <- cli::bg_red(cli::style_bold(cli::col_white(paste0(intToUtf8(0x5125), i, intToUtf8(0x5130)))))
       else
         score_icons[i] <- cli::bg_red(cli::style_bold(cli::col_white(paste0(" ", i, " "))))
     }
     # CORRECT
     else if (.scores[i] == 1) {
       if (i == .problem_number)
-        score_icons[i] <- cli::bg_cyan(cli::style_bold(cli::col_white(paste0("", intToUtf8(0x1405), " ", i, " ", intToUtf8(0x140A), ""))))
+        score_icons[i] <- cli::bg_cyan(cli::style_bold(cli::col_white(paste0(intToUtf8(0x5125), i, intToUtf8(0x5130)))))
       else
         score_icons[i] <- cli::bg_cyan(cli::style_bold(cli::col_white(paste0(" ", i, " "))))
     }
